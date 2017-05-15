@@ -2,5 +2,5 @@
   "apiKey": "AIzaSyBU_RLXN7BZwHcOUWdZY8L8bHtVSfXRQYk",
   "authDomain": "bc-22-onlinestore.firebaseapp.com",
   "databaseURL": "https://bc-22-onlinestore.firebaseio.com/",
-  "storageBucket": "gs://bc-22-onlinestore.appspot.com",
+  "storageBucket": "gs://bc-22-onlinestore.appspot.com"
 }

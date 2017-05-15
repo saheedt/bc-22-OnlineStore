@@ -17,6 +17,7 @@ exports.login = (req, res)=>{
 		res.send(cred);
 	}).catch((error)=>{
 		res.send(error);
+	});
 };
 
 exports.signup = (req, res)=>{
@@ -29,6 +30,6 @@ exports.signup = (req, res)=>{
 		res.send(createCred);
 	}).catch((error)=>{
 		res.send(error);
-	})
-}
+	});
+};
 
