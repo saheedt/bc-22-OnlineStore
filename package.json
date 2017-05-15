@@ -1,0 +1,32 @@
+{
+  "name": "bc-22-onlinestore",
+  "version": "1.0.0",
+  "description": "Online store",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saheedt/bc-22-OnlineStore.git"
+  },
+  "keywords": [
+    "online",
+    "store"
+  ],
+  "author": "Saheed Ajibulu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/saheedt/bc-22-OnlineStore/issues"
+  },
+  "homepage": "https://github.com/saheedt/bc-22-OnlineStore#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "firebase": "^3.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
