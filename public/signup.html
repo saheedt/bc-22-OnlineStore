@@ -5,7 +5,21 @@
 </head>
 <body>
 
-  <h1>SIGNUP HAPPENS HERE!</h1>
+  <div id="loginContainer">
+  	<div id="regInnerContainer">
+  		<div id="regErrDisplay"></div>
+  	<div class="formTitles">SIGN UP</div>
+  	<form id="regForm" action="/api/signup" method="post">
+ 	<p><input class="inputBox" id="signupEmailInput" type="email" name="email" placeholder="email" required> </p>
+ 	<p><input class="inputBox" id="signupDisplayNameInput" type="text" name="displayname" placeholder="display name" required> </p>
+  	<p ><input class="inputBox" id="signupPasswordInput" type="password" name="password" placeholder="password" required></p>
+  	<p ><input class="inputBox" id="xsignupPasswordInput" type="password" name="password" placeholder="password" required></p>
+  	<p> <button id="regBtn">SIGN UP</button></p>
+  </form>
 
+  	</div>
+  </div>
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<script type="text/javascript" src="js/reg.js"></script>
 </body>
 </html>

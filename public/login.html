@@ -5,7 +5,18 @@
 </head>
 <body>
 
-  <h1>LOGIN HAPPENS HERE!</h1>
-
+  <div id="loginContainer">
+  	<div id="loginInnerContainer">
+  		<div id="loginErrDisplay"></div>
+  	<div class="formTitles">LOGIN</div>
+  	<form id="loginForm" action="/api/login" method="post">
+ 	<p><input class="inputBox" id="loginEmailInput" type="email" name="email" placeholder="email" required> </p>
+  	<p ><input class="inputBox" id="loginPasswordInput" type="password" name="password" placeholder="password" required></p>
+  	<p> <button id="loginBtn">Login</button> <!--<input id="loginBtn" type="submit" value="Login">--></p>
+  	</form>
+  	</div>
+  </div>
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>

@@ -1,0 +1,152 @@
+body{
+	width: 100%;
+	margin: 0;
+}
+nav {
+	height: 3rem;
+	background-color: #00AECC;
+	width: 100%;
+	position: fixed;
+	top: 0;
+}
+#navBtn {
+	/*float: right;*/
+	color: #FFF;
+	background-color:  #00AECC;
+	height: 3rem;
+	border-radius: 0;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+    margin-left: 3rem;
+    width: 4rem;
+
+}
+.navBtn:hover, .navBtn:focus {
+    background-color: #3e8e41;
+}
+.dropDownContainer{
+	position: relative;
+    display: inline-block;
+    float:right;
+    width: 8rem
+}
+.dropdown-content{
+	display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    /*margin-top: 2.8rem;*/
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {background-color: #f1f1f1}
+.show {display:block;}
+#indexContainer{
+	width: 90%;
+	height: 100rem;
+	background-color: lightgray;
+	margin:auto;
+	/*position: absolute;*/
+}
+#indexSlider{
+	height:20rem;
+	width:100%;
+	/*margin-left: 5%;*/
+	background-color: orange;
+	margin-top: 3.5rem;
+	/*position: absolute;*/
+
+}
+#indexProductDisplay{
+	height: 50rem;
+	width: 100%%;
+	margin-top: 1rem;
+	/*margin-left:5%;*/
+	background-color: #00AECC;
+	/*margin:auto;*/
+}
+#loginContainer{
+	width: 50%;
+	height: 30rem;
+	margin-left: 25%;
+	position: absolute;
+	/*background-color: blue;*/
+}
+.formTitles{
+	text-align: center;
+	font-size: 14px;
+	margin-top: 2rem;
+	font-weight:bold;
+}
+.inputBox{
+	width: 80%;
+	height: 2rem;
+	margin-left: 10%;
+}
+#loginContainer p{
+	vertical-align: top;
+	width: 100%;
+	height: 2rem;
+	margin-top:1rem;
+}
+#loginInnerContainer{
+	width:100%;
+	height:15rem;
+	margin-top: 5rem;
+	background-color: teal;
+	position:absolute;
+}
+#regInnerContainer{
+	width:100%;
+	height:20rem;
+	margin-top: 5rem;
+	background-color: teal;
+	position:absolute;
+}
+#loginBtn{
+	width: 81.5%;
+	height: 2rem;
+	margin-left: 10%;
+	border-radius: 0;
+	text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+}
+#regBtn{
+	width: 81.5%;
+	height: 2rem;
+	margin-left: 10%;
+	border-radius: 0;
+	text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+}
+#loginErrDisplay{
+	width: 100%;
+	height: 1rem;
+	background-color: red;
+	text-align: center;
+	font-size: 14px;
+	color: #FFF;
+	display: none;
+}
+#regErrDisplay{
+	width: 100%;
+	height: 1rem;
+	background-color: red;
+	text-align: center;
+	font-size: 14px;
+	color: #FFF;
+	display: none;
+}
