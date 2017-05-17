@@ -6,6 +6,7 @@ const config = require('../../config.json');
 //initialize firebase with project config.
 firebase.initializeApp(config);
 
+const db = firebase.database();
 //export login control
 
 //api controllers
@@ -50,18 +51,35 @@ exports.signup = (req, res)=>{
 };
 
 //create store api
-exports.createStore = (req, res)=>{
-	const db = firebase.database();
-	let user = firebase.auth().currentUser.displayName
-	db.ref('stores').child(user).child("store");
+exports.createStore = (req, res)=>{	
+	const user = firebase.auth().currentUser;
+	const storesRef = db.ref("stores");
 
+	if(user != null){
+		//res.redirect('editstore.html');
+		console.log(user.displayName);
+
+		storesRef.child(user.displayName).once('value', (snapshot) =>{
+			let exists = snapshot.val()
+			console.log("stores direct child value is: ", exists);
+			console.log("stores direct child exists? :", (exists !== null));
+		});
+		res.send({"message":"we are signed in to create store"});
+
+	}else{
+		res.send({"message": "log in to create store"});
+		//res.redirect('/login');
+	}
+
+	//db.ref('stores').child(user);
+	//res.redirect('/'+user);
 };
 
 
 /*******view controllers*******/
 
 exports.showLanding = (req, res)=>{
-	res.render('index.html');
+	res.redirect('index.html');
 };
 exports.showLogin = (req, res)=>{
 	res.redirect('login.html');
@@ -70,21 +88,23 @@ exports.showSignUp = (req, res)=>{
 	res.redirect('signup.html');
 };
 
-exports.showCreateStore = (req, res) => {
+/*exports.showCreateStore = (req, res) => {
 	let user = firebase.auth().currentUser;
+	let test = db.ref("stores");
+	console.log('stores ref: ', test);
+	console.log('stores ref child:', test.child(user));
+};*/
 
+/*exports.showEditStore = (req, res) => {
+	
+	return;
 	// check if user is logged in and show appropriate page.
 	if(user != null || user.displayName != null){
-		res.redirect('createstore.html');	
+		res.redirect('editstore.html');
 	}else{
 		res.redirect('login.html');
 	}
-};
+};*/
+//export firebase instance
 
-exports.isAuthenticated = (req, res)=>{
-	let user = firebase.auth().currentUser;
-	if(user){
-
-	};
-};
-
+//exports.fireBaseInstance = firebase;

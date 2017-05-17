@@ -11,7 +11,7 @@ window.addEventListener('load', function(){
 
 
 
-		fetch("http://localhost:3000/createstore", {
+		fetch("http://localhost:3000/createStore", {
   		method: "POST"
   		//body: formData
 		})
@@ -28,7 +28,11 @@ window.addEventListener('load', function(){
 				}else{
 					//TODO: Error handling..
 				}*/
-				console.log(resp);
+				if(resp.message == "log in to create store"){
+					window.location.pathname = "/login";
+				}else{
+					console.log(resp);
+				}
 			});
 		})
 		.catch((error)=>{
