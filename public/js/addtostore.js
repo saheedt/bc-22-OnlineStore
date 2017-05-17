@@ -1,0 +1,45 @@
+window.addEventListener('load', function(){
+	let image = document.getElementById("productImageUploader");
+	let imageCanvas = document.getElementById("productImageCanvas");
+	let imgTag = document.getElementById("proImg");
+
+
+	image.addEventListener("change",(e)=>{
+		resizeImageToSpecificWidth(document.getElementsByTagName('input')[3].files[0], 150, function(dat) {
+        imgTag.src = dat;
+  		});
+	});
+
+});
+
+
+function resizeImageToSpecificWidth(file, max, cb) {
+  let data;
+    let reader = new FileReader();
+    reader.onload = function(event) {
+      let img = new Image();
+      img.onload = function() {
+        if (img.width > max) {
+          let oc = document.createElement('canvas'), octx = oc.getContext('2d');
+          oc.width = img.width;
+          oc.height = img.height;
+          octx.drawImage(img, 0, 0);
+          if( img.width > img.height) {
+            oc.height = (img.height / img.width) * max;
+            oc.width = max;
+          } else {
+            oc.width = (img.width / img.height) * max;
+            oc.height = max;
+          }
+          octx.drawImage(oc, 0, 0, oc.width, oc.height);          
+          octx.drawImage(img, 0, 0, oc.width, oc.height);
+          data = oc.toDataURL();
+        } else {
+          data = oc.toDataURL();
+        }
+        cb(data);
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+}

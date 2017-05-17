@@ -150,3 +150,39 @@ nav {
 	color: #FFF;
 	display: none;
 }
+#addToStoreMain{
+	width: 100%;
+	height: 80rem;
+}
+#productPostContainer{
+	width: 80%;
+	margin-left: 10%;
+	background-color: lightgray;
+	/*position: absolute;*/
+	margin-top: 4rem;
+	height: 9.5rem;
+}
+#productListContainer{
+	width: 80%;
+	margin-left: 10%;
+	background-color: purple;
+	/*position: absolute;*/
+	margin-top: 1rem;
+	height: 100%;
+}
+#productPostLeft{
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+#productPostLeft p{
+	margin-left: 10%
+}
+#productPostLeft input{
+	margin-left: 2%;
+}
+#productPostRight{
+	width: 50%;
+	height: 100%;
+	float: right;
+}
