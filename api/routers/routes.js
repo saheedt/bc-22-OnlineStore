@@ -18,6 +18,7 @@ module.exports = (app)=>{
 	app.get('/login', controller.showLogin);
 	app.get('/signup', controller.showSignUp);
 	app.post('/createstore', controller.createStore);
+	app.get('/addtostore', controller.showAddTStore);
 	/*app.get('/store/:storeName', controller.getStore)
 	app.get('/store/')*/
 

@@ -37,9 +37,14 @@ window.addEventListener('load', function(){
 			response.json().then((resp)=>{
 				if(resp.message == "log in to create store"){
 					window.location.pathname = "/login";
-				}else{
-					console.log(resp);
-					//TODO: Handle error.
+				}else if(resp.message == "new store created"){
+					window.location.pathname = "/addtostore";
+				}else if(resp.message == "store creation failed"){
+					//TODO: error display.
+					console.log(resp.message);
+				}else if(resp.message == "store exists"){
+					//TODO: error display.
+					console.log(resp.message);
 				}
 			});
 		})

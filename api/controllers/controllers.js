@@ -72,31 +72,37 @@ exports.createStore = (req, res)=>{
 	const user = firebase.auth().currentUser;
 	const storesRef = db.ref('stores');
 	const initialEntry = {"entry":"items"};
+	let found = false;
 
 	if(user != null){
 
 		storesRef.once('value').then((snapshot)=>{
 			let exists = snapshot.val();
 			//stop script here to see return value later.
-			if (exists !== user.displayName){
+			for (let inDb in exists){
+				if(inDb == user.displayName){
+					found = true;
+				}
+			}
+			//console.log("found value is: ", found);
+			if(found === true){
+				res.send({"message":"store exists"});
+				found = false;
+			}else{
 				let storeName = user.displayName;
-				storesRef.child(storeName).set(initialEntry);
+				storesRef.child(storeName).set(initialEntry).then(
+					function(){
+						res.send({"message":"new store created"})
+					}, 
+					function(){
+						res.send({"message":"store creation failed"})
+					}
+				);
 			}
-		}).catch((error)=>{
-			res.send({"message":"Error creating new store."})
-		});
-
-
-		storesRef.on('child_added', (snapshot)=>{
-			if(snapshot.val() == user.displayName){
-				res.send({"message":"new store "+snapshot.val()+" created"});
-			}
-
 		});
 
 	}else{
 		res.send({"message": "log in to create store"});
-		//res.redirect('/login');
 	}
 
 };
@@ -114,20 +120,6 @@ exports.showSignUp = (req, res)=>{
 	res.redirect('signup.html');
 };
 
-/*exports.showCreateStore = (req, res) => {
-	let user = firebase.auth().currentUser;
-	let test = db.ref("stores");
-	console.log('stores ref: ', test);
-	console.log('stores ref child:', test.child(user));
-};*/
-
-/*exports.showEditStore = (req, res) => {
-	
-	return;
-	// check if user is logged in and show appropriate page.
-	if(user != null || user.displayName != null){
-		res.redirect('editstore.html');
-	}else{
-		res.redirect('login.html');
-	}
-};*/
+exports.showAddTStore = (req, res) => {
+	res.redirect('addtostore.html');
+};
