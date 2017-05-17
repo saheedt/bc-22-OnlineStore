@@ -25,6 +25,15 @@ exports.login = (req, res)=>{
 	});
 };
 
+exports.isLoggedIn = (req, res)=>{
+	const user = firebase.auth().currentUser;
+	if(user != null){
+		res.send({"message":"Logged In"});
+		return;
+	}
+	res.send({"message": "Not Logged In"});
+};
+
 
 //signup api
 exports.signup = (req, res)=>{
@@ -46,32 +55,50 @@ exports.signup = (req, res)=>{
 		});
 		res.send(createCred);
 	}).catch((error)=>{
-		res.send(error);
+		res.send({"message":{"Sign Up Error": error}});
+	});
+};
+exports.signout = (req, res)=>{
+
+	firebase.auth().signOut().then(function() {
+  		res.send({"message": "successful Sign Out"});
+	}, function(error) {
+  		res.send({"message":{"Sign Out Error": error}});
 	});
 };
 
 //create store api
 exports.createStore = (req, res)=>{	
 	const user = firebase.auth().currentUser;
-	const storesRef = db.ref("stores");
+	const storesRef = db.ref('stores');
+	const initialEntry = {"entry":"items"};
 
 	if(user != null){
-		//res.redirect('editstore.html');
-		//.child(user.displayName)
-		storesRef.once('value', (snapshot) =>{
-			let exists = snapshot.val()
-			console.log("stores direct child value is: ", exists);
-			console.log("stores direct child exists? :", (exists !== null));
+
+		storesRef.once('value').then((snapshot)=>{
+			let exists = snapshot.val();
+			//stop script here to see return value later.
+			if (exists !== user.displayName){
+				let storeName = user.displayName;
+				storesRef.child(storeName).set(initialEntry);
+			}
+		}).catch((error)=>{
+			res.send({"message":"Error creating new store."})
 		});
-		res.send({"message":"we are signed in to create store"});
+
+
+		storesRef.on('child_added', (snapshot)=>{
+			if(snapshot.val() == user.displayName){
+				res.send({"message":"new store "+snapshot.val()+" created"});
+			}
+
+		});
 
 	}else{
 		res.send({"message": "log in to create store"});
 		//res.redirect('/login');
 	}
 
-	//db.ref('stores').child(user);
-	//res.redirect('/'+user);
 };
 
 
@@ -104,6 +131,3 @@ exports.showSignUp = (req, res)=>{
 		res.redirect('login.html');
 	}
 };*/
-//export firebase instance
-
-//exports.fireBaseInstance = firebase;

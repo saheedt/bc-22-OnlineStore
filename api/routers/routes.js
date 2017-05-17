@@ -24,5 +24,7 @@ module.exports = (app)=>{
 	//api routes
 	app.route('/api/login').post(controller.login);
 	app.route('/api/signup').post(controller.signup);
+	app.route('/api/signout').post(controller.signout);
+	app.route('/api/isLoggedIn').post(controller.isLoggedIn);
 	//app.route('/api/logout').post(controller.signup);
 }

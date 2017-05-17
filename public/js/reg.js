@@ -51,16 +51,8 @@ window.addEventListener('load', function(){
 		})
 		.then((response)=>{
 			response.json().then((res)=>{
-				console.log(res);
 			if(res.uid){
-				if(localStorage.getItem('bc-22-onlinestore')){
-					localStorage.removeItem('bc-22-onlinestore');
-					localStorage.setItem('bc-22-onlinestore', JSON.stringify({"uid":res.uid, "email": res.email}));
 					window.location.pathname = "/";
-				}else{
-					localStorage.setItem('bc-22-onlinestore', JSON.stringify({"uid":res.uid, "email": res.email}));
-					window.location.pathname = "/";
-				}
 			}else{
 				//TODO: Display error message.
 			}
