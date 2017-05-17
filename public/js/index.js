@@ -19,9 +19,6 @@ window.addEventListener('load', function(){
 					indexSignOut.style.display = "none";
 				}
 			});
-		})
-		.catch((error)=>{
-			//TODO: Error handling..
 		});
 
 	indexNavBtn.addEventListener('click', (e)=>{
@@ -75,5 +72,19 @@ window.addEventListener('load', function(){
 			//TODO: Error handling..
 		});
 	});
+
+window.onclick = function(event) {
+  if (!event.target.matches('#navBtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 	});
 //});

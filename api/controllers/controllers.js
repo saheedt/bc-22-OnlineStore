@@ -107,6 +107,12 @@ exports.createStore = (req, res)=>{
 
 };
 
+exports.addItemsToStore = (req, res) => {
+
+	//add items to store
+
+};
+
 
 /*******view controllers*******/
 

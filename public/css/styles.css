@@ -181,8 +181,21 @@ nav {
 #productPostLeft input{
 	margin-left: 2%;
 }
+.asinputbox{
+	width: 15rem;
+}
 #productPostRight{
 	width: 50%;
 	height: 100%;
 	float: right;
+}
+#AddItemToStoreBtn{
+	width: 5rem;
+	height: 1.5rem;
+	margin-left: -2rem;
+	border-radius: 0;
+	text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
 }

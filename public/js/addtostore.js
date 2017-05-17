@@ -1,7 +1,27 @@
 window.addEventListener('load', function(){
 	let image = document.getElementById("productImageUploader");
-	let imageCanvas = document.getElementById("productImageCanvas");
 	let imgTag = document.getElementById("proImg");
+	let addToStoreNavBtn = document.getElementById('navBtn');
+	let signOutBtn = document.getElementById('AddTOStoreSignOut');
+
+
+
+
+	fetch("http://localhost:3000/api/isLoggedIn", {
+  		method: "POST"
+  		//body: formData
+		})
+		.then((response)=>{
+			response.json().then((resp)=>{
+				if(resp.message == "Logged In"){
+					signOutBtn.style.display = "block";
+				}
+
+				if(resp.message == "Not Logged In"){
+					signOutBtn.style.display = "none";
+				}
+			});
+		});
 
 
 	image.addEventListener("change",(e)=>{
@@ -9,6 +29,24 @@ window.addEventListener('load', function(){
         imgTag.src = dat;
   		});
 	});
+
+	addToStoreNavBtn.addEventListener('click', (e)=>{
+		document.getElementById("Dropdown").classList.toggle("show");
+	});
+
+window.onclick = function(event) {
+  if (!event.target.matches('#navBtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 
 });
 
