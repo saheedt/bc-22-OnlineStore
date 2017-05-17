@@ -57,9 +57,8 @@ exports.createStore = (req, res)=>{
 
 	if(user != null){
 		//res.redirect('editstore.html');
-		console.log(user.displayName);
-
-		storesRef.child(user.displayName).once('value', (snapshot) =>{
+		//.child(user.displayName)
+		storesRef.once('value', (snapshot) =>{
 			let exists = snapshot.val()
 			console.log("stores direct child value is: ", exists);
 			console.log("stores direct child exists? :", (exists !== null));
