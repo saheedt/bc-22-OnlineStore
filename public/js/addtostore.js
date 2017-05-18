@@ -95,7 +95,7 @@ fetch(location.origin+"/api/getstoreitems", {
 		})
 		.then((response)=>{
 			response.json().then((storeItems)=>{
-				let temp = [], directory = storeItems.entry;
+				let directory = storeItems.entry;
 				for (let data in directory){
 					storeData.push(directory[data]);
 				}

@@ -230,9 +230,22 @@ nav {
 ul {
 	list-style: none;
 }
-.list li{
+#addToStoreList li{
 	height: 8rem;
+}
+#storelist li{
+	height: 1.5rem;
 }
 #txtHolder p{
 	border-bottom: 1px solid black;
+}
+#storelist li{
+	float: left;
+	margin-top: 5rem;
+	margin-left: 3rem;
+}
+#storeImg{
+	width: 150px;
+	height: 150px;
+
 }

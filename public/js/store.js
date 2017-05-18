@@ -3,6 +3,7 @@ window.addEventListener('load', function(){
 	const storeCreateStore = document.getElementById("storeCreateStore");
 	const storeAddToStore = document.getElementById("storeAddToStore");
 	const storeSignOut = document.getElementById("storeSignOut");
+	let storeData = [], dataCollected = false;
 
 	//check if a user has a store created
 	const hasStore = ()=>{
@@ -97,7 +98,51 @@ window.addEventListener('load', function(){
 			method: "POST"
 		}).then((response)=>{
 			response.json().then((items)=>{
-				console.log(items);
+				//console.log(items);
+
+				let directory = items.entry;
+				for (let data in directory){
+					storeData.push(directory[data]);
+				}
+				dataCollected = true;
+
+				let options ={
+					valueNames:['title', 'price', 'desc', {name: 'image', attr: 'src'} ],
+					item: '<li><img id="storeImg" class="image"></li>'
+				};
+				let storeProductListing = new List('storeProductListing', options);
+
+				for(let count = 0; count < storeData.length; count++){
+					//console.log(storeData[count]);
+					if(storeData[count] !== undefined){
+						storeProductListing.add(storeData[count]);
+					}
+				}
+
+		/*let doAdd = setInterval(()=>{
+
+			if(dataCollected === true){
+			
+			if(storeData[index] === undefined){
+				clearInterval(doAdd);
+				index = 0;
+			}
+		let options = {
+		valueNames:['title', 'price', 'desc', {name: 'image', attr: 'src'} ],
+		item: '<li><div id="imageHolder"><img id="pImg" class="image"></div><div id="txtHolder"><p class="title"></p><p class="price">U+020A6</p><p class="desc"></p></div></li>'
+		};
+		let productListing = new List('productListing', options);
+		toAdd = storeData[index];
+		productListing.add(toAdd);
+		index = index + 1;
+	}
+
+},2000);*/
+
+
+
+
+
 			});
 		});
 
