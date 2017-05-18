@@ -107,12 +107,73 @@ exports.createStore = (req, res)=>{
 
 };
 
+//add items to store.
 exports.addItemsToStore = (req, res) => {
 
-	//add items to store
+	let user = firebase.auth().currentUser;
+	let title = req.body.title, price = req.body.price, desc = req.body.desc, image = req.body.image;
+
+	if(user != null){
+		let storeName = user.displayName;
+		let itemRef = db.ref("stores/"+storeName+"/entry");
+		itemRef.once("value")
+			.then((snapshot)=>{
+
+				if (snapshot.val() == "items"){
+					let newItemref = itemRef.push();
+						newItemref.set({
+							"title": title,
+							"price": price,
+							"desc": desc,
+							"image": image
+						});
+				}else{
+					itemRef.push({
+						"title": title,
+						"price": price,
+						"desc": desc,
+						"image": image
+					});
+				}
+
+			});
+
+	}else{
+		res.send({"message": "log in to add items to store"})
+	}
 
 };
 
+//list store items
+exports.listStoreItems = (req, res) => {
+
+};
+
+
+exports.hasStore = (req, res)=>{
+	const user = firebase.auth().currentUser;
+	const storesRef = db.ref('stores');
+	let found = false;
+	storesRef.once('value').then((snapshot)=>{
+
+		let exists = snapshot.val();
+
+		for(let present in exists){
+			if(present == user.displayName){
+				found = true;
+			}
+		}
+
+		if(found == true){
+			res.send({"message": "has store already"});
+			found = false;
+		}else{
+			res.send({"message": "has no store"});
+		}
+
+
+	});
+};
 
 /*******view controllers*******/
 

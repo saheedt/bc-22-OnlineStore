@@ -3,6 +3,14 @@ window.addEventListener('load', function(){
 	let imgTag = document.getElementById("proImg");
 	let addToStoreNavBtn = document.getElementById('navBtn');
 	let signOutBtn = document.getElementById('AddTOStoreSignOut');
+	let addItemsToStoreBtn = document.getElementById("AddItemToStoreBtn");
+	let home = document.getElementById("navHome");
+
+	let productTitle = document.getElementById("productTitle");
+	let productPrice = document.getElementById("productPrice");
+	let productDesc = document.getElementById("productDesc");
+	let productImage;
+
 
 
 
@@ -27,7 +35,11 @@ window.addEventListener('load', function(){
 	image.addEventListener("change",(e)=>{
 		resizeImageToSpecificWidth(document.getElementsByTagName('input')[3].files[0], 150, function(dat) {
         imgTag.src = dat;
+        productImage = dat;
   		});
+	});
+	home.addEventListener("click",(e)=>{
+		window.location.pathname = "/";
 	});
 
 	addToStoreNavBtn.addEventListener('click', (e)=>{
@@ -35,18 +47,55 @@ window.addEventListener('load', function(){
 	});
 
 window.onclick = function(event) {
-  if (!event.target.matches('#navBtn')) {
-
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
+	
+  if (event.target.matches('#navBtn') || event.target.matches('.material-icons')) {
+  	return;
     }
-  }
-}
+    	var dropdowns = document.getElementsByClassName("dropdown-content");
+    	var i;
+    	for (i = 0; i < dropdowns.length; i++) {
+      	var openDropdown = dropdowns[i];
+      	if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      	}
+	}
+};
+
+
+addItemsToStoreBtn.addEventListener("click",()=>{
+
+	let storeData = {
+		"title": productTitle.value,
+		"price": productPrice.value,
+		"desc": productDesc.value,
+		"image": productImage
+	}
+
+	fetch("http://localhost:3000/api/addtostore", {
+  		method: "POST",
+  		headers:{'Content-Type':'application/json'},
+  		body: JSON.stringify(storeData)
+		})
+		.then((response)=>{
+			response.json().then((resp)=>{
+				if(resp.message == "log in to add items to store"){
+					window._cameFrom = "/addtostore";
+					window.location.pathname = "/login";
+				}
+			});
+		})
+		.catch((error)=>{
+			console.log(error);
+			//TODO: Error handling..
+	});
+});
+
+/*
+//do listing
+let options = {
+	valueNames:['title', 'price', 'desc', {name: 'image', attr: 'src'} ]
+};
+let productListing = new List('productListing', options);*/
 
 });
 

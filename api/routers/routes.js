@@ -27,6 +27,7 @@ module.exports = (app)=>{
 	app.route('/api/signup').post(controller.signup);
 	app.route('/api/signout').post(controller.signout);
 	app.route('/api/isLoggedIn').post(controller.isLoggedIn);
-	app.route('/api/addtostore', controller.addItemsToStore);
+	app.route('/api/addtostore').post(controller.addItemsToStore);
+	app.route('/api/hasstore').post(controller.hasStore);
 	//app.route('/api/logout').post(controller.signup);
 }

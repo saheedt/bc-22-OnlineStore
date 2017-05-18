@@ -41,7 +41,13 @@ window.addEventListener('load', function(){
 		.then((response)=>{
 			response.json().then((resp)=>{
 				if(resp.uid){
+					if(typeof window._cameFrom == "string"){
+						window.location.pathname = window._cameFrom;
+						window._cameFrom = null;
+					}else{
 						window.location.pathname = "/";
+					}
+						
 				}else{
 					//TODO: Error handling..
 				}

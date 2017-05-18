@@ -6,12 +6,13 @@
 <body>
 	<!--nav-->
 	<nav>
+	<button id="navHome"><i class="material-icons">home</i> </button>
   	<div class="dropDownContainer">
-  		<button id="navBtn">Menu</button>
+  		<button id="navBtn"><i class="material-icons">menu</i></button>
   		<div id="Dropdown" class="dropdown-content">
-    		<a href="#">CART</a>
+    		<!--<a href="#">CART</a>-->
     		<!--<a id="createStore" href="#">Create Store</a>-->
-    		<a style="display: none" id="AddTOStoreSignOut" href="#">Sign out</a>
+    		<a style="display: none" id="AddTOStoreSignOut" href="#">sign out</a>
   		</div>
  	</div>
   </nav>
@@ -20,21 +21,29 @@
   <div id="productPostContainer">
 
   	<div id="productPostLeft">
-  	<p>Title: <input class="asinputbox" type="text" name="title" required></p>
-  	<p>Price: <input class="asinputbox" type="number" name="price" required></p>
-  	<p>Desc: <input class="asinputbox" type="text" name="description" required></p>
+  	<p>Title: <input id="productTitle" class="asinputbox" type="text" name="title" required></p>
+  	<p>Price: <input id="productPrice" class="asinputbox" type="number" name="price" required></p>
+  	<p>Desc: <input id="productDesc" class="asinputbox" type="text" name="description" required></p>
   	<p><input id="productImageUploader"type="file" name="image" accept="image/*"> <button id="AddItemToStoreBtn">Add</button></p>
   	</div>
 
   	<div id="productPostRight">
   		<!--<canvas id="productImageCanvas">Browser support for image display limited.</canvas>-->
-  		<img id="proImg">
+  		<img style="margin-top: 1rem; margin-left: 5rem" id="proImg">
   	</div>
   </div>
   <div id="productListContainer">
+  	<div id="productListing">
+  		<ul class="list">
+
+  		</ul>
+
+  	</div>
 
   </div>
 </div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <script type="text/javascript" src="js/addtostore.js"></script>
 </body>

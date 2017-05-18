@@ -2,6 +2,26 @@ window.addEventListener('load', function(){
 	const indexNavBtn = document.getElementById('navBtn');
 	const createStore = document.getElementById('createStore');
 	const indexSignOut = document.getElementById('indexSignOut');
+	const indexCreateStore = document.getElementById("createStore");
+	const indexAddToStore = document.getElementById("addToStore");
+
+	
+	const hasStore = ()=>{
+		fetch("http://localhost:3000/api/hasstore",{
+			method: "POST"
+		}).then((feed)=>{
+			feed.json().then((has)=>{
+				if(has.message == "has store already"){
+					indexCreateStore.style.display = "none";
+					indexAddToStore.style.display = "block";
+				}
+				if(has.message == "has no store"){
+					indexCreateStore.style.display = "block";
+					indexAddToStore.style.display = "none";
+				}
+			});
+		});
+	};
 
 	// check if user is logged in and handle signout button
 	// accordingly.
@@ -13,6 +33,7 @@ window.addEventListener('load', function(){
 			response.json().then((resp)=>{
 				if(resp.message == "Logged In"){
 					indexSignOut.style.display = "block";
+					hasStore();
 				}
 
 				if(resp.message == "Not Logged In"){
@@ -74,17 +95,18 @@ window.addEventListener('load', function(){
 	});
 
 window.onclick = function(event) {
-  if (!event.target.matches('#navBtn')) {
-
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
+	
+  if (event.target.matches('#navBtn') || event.target.matches('.material-icons')) {
+  	return;
     }
-  }
-}
+    	var dropdowns = document.getElementsByClassName("dropdown-content");
+    	var i;
+    	for (i = 0; i < dropdowns.length; i++) {
+      	var openDropdown = dropdowns[i];
+      	if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      	}
+	}
+};
 	});
 //});
