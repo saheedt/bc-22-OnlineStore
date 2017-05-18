@@ -13,7 +13,7 @@ window.addEventListener('load', function(){
 
 
 
-	fetch("http://localhost:3000/api/isLoggedIn", {
+	fetch(location.origin+"/api/isLoggedIn", {
   		method: "POST"
   		//body: formData
 		})
@@ -70,7 +70,7 @@ addItemsToStoreBtn.addEventListener("click",()=>{
 		"image": productImage
 	}
 
-	fetch("http://localhost:3000/api/addtostore", {
+	fetch(location.origin+"/api/addtostore", {
   		method: "POST",
   		headers:{'Content-Type':'application/json'},
   		body: JSON.stringify(storeData)
@@ -89,7 +89,7 @@ addItemsToStoreBtn.addEventListener("click",()=>{
 	});
 });
 
-fetch("http://localhost:3000/api/getstoreitems", {
+fetch(location.origin+"/api/getstoreitems", {
   		method: "POST",
   		headers:{'Content-Type':'application/json'},
 		})
@@ -130,17 +130,6 @@ let doAdd = setInterval(()=>{
 
 },2000);
 
-/*function doTpl(){
-	let options = {
-		valueNames:['title', 'price', 'desc', {name: 'image', attr: 'src'} ],
-		item: '<li><div id="imageHolder"><img class="image"></div><div id="txtHolder"><p class="title"></p><p class="price"></p><p class="desc"></p></div></li>'
-	};
-	let productListing = new List('productListing', options);
-
-	for( let i = 0; i <= storeData.length; i++ ){
-		productListing.add(storeData[i]);
-	}
-};*/
 
 });
 

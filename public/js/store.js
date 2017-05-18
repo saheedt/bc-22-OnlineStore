@@ -1,56 +1,51 @@
 window.addEventListener('load', function(){
-	const indexNavBtn = document.getElementById('navBtn');
-	const createStore = document.getElementById('createStore');
-	const indexSignOut = document.getElementById('indexSignOut');
-	const indexCreateStore = document.getElementById("createStore");
-	const indexAddToStore = document.getElementById("addToStore");
+	const storeNavBtn = document.getElementById('navBtn');
+	const storeCreateStore = document.getElementById("storeCreateStore");
+	const storeAddToStore = document.getElementById("storeAddToStore");
+	const storeSignOut = document.getElementById("storeSignOut");
 
-	
+	//check if a user has a store created
 	const hasStore = ()=>{
 		fetch(location.origin+"/api/hasstore",{
 			method: "POST"
 		}).then((feed)=>{
 			feed.json().then((has)=>{
 				if(has.message == "has store already"){
-					indexCreateStore.style.display = "none";
-					indexAddToStore.style.display = "block";
+					storeCreateStore.style.display = "none";
+					storeAddToStore.style.display = "block";
 				}
 				if(has.message == "has no store"){
-					indexCreateStore.style.display = "block";
-					indexAddToStore.style.display = "none";
+					storeCreateStore.style.display = "block";
+					storeAddToStore.style.display = "none";
 				}
 			});
 		});
 	};
 
-	// check if user is logged in and handle signout button
-	// accordingly.
+
 	fetch(location.origin+"/api/isLoggedIn", {
   		method: "POST"
-  		//body: formData
-		})
-		.then((response)=>{
-			response.json().then((resp)=>{
-				if(resp.message == "Logged In"){
-					indexSignOut.style.display = "block";
-					hasStore();
-				}
+	})
+	.then((response)=>{
+		response.json().then((resp)=>{
+			if(resp.message == "Logged In"){
+				storeSignOut.style.display = "block";
+				hasStore();
+			}
 
-				if(resp.message == "Not Logged In"){
-					indexSignOut.style.display = "none";
-				}
-			});
+			if(resp.message == "Not Logged In"){
+				storeSignOut.style.display = "none";
+			}
 		});
+	});
 
-	addToStore.addEventListener('click', (e)=>{
+	storeAddToStore.addEventListener('click', (e)=>{
 		window.location.pathname = '/addtostore';
 	});
-
-	indexNavBtn.addEventListener('click', (e)=>{
+	storeNavBtn.addEventListener('click', (e)=>{
 		document.getElementById("Dropdown").classList.toggle("show");
 	});
-
-	createStore.addEventListener('click', (e)=>{
+	storeCreateStore.addEventListener('click', (e)=>{
 		fetch(location.origin+"/createStore", {
   		method: "POST"
   		//body: formData
@@ -75,8 +70,7 @@ window.addEventListener('load', function(){
 			//TODO: Error handling..
 		});
 	});
-
-	indexSignOut.addEventListener('click', (e)=>{
+	storeSignOut.addEventListener('click', (e)=>{
 		fetch(location.origin+"/api/signout", {
   		method: "POST"
   		//body: formData
@@ -98,11 +92,20 @@ window.addEventListener('load', function(){
 		});
 	});
 
-window.onclick = function(event) {
+	///api/getsore
+	fetch(location.origin+"/api/getsore",{
+			method: "POST"
+		}).then((response)=>{
+			response.json().then((items)=>{
+				console.log(items);
+			});
+		});
+
+	window.onclick = function(event) {
 	
-  if (event.target.matches('#navBtn') || event.target.matches('.material-icons')) {
-  	return;
-    }
+  		if (event.target.matches('#navBtn') || event.target.matches('.material-icons')) {
+  			return;
+    	}
     	let dropdowns = document.getElementsByClassName("dropdown-content");
     	let i;
     	for (i = 0; i < dropdowns.length; i++) {
@@ -112,5 +115,4 @@ window.onclick = function(event) {
       	}
 	}
 };
-	});
-//});
+});

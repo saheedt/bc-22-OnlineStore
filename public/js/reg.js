@@ -44,7 +44,7 @@ window.addEventListener('load', function(){
 			"displayname": displayName.value
 		};
 
-		fetch("http://localhost:3000/api/signup", {
+		fetch(location.origin+"/api/signup", {
   		method: "POST",
   		headers:{'Content-Type':'application/json'},
   		body: JSON.stringify(formData)
