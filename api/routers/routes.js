@@ -18,7 +18,7 @@ module.exports = (app)=>{
 	app.get('/login', controller.showLogin);
 	app.get('/signup', controller.showSignUp);
 	app.post('/createstore', controller.createStore);
-	app.get('/addtostore', controller.showAddTStore);
+	app.get('/addtostore', controller.showAddToStore);
 	/*app.get('/store/:storeName', controller.getStore)
 	app.get('/store/')*/
 
@@ -29,5 +29,6 @@ module.exports = (app)=>{
 	app.route('/api/isLoggedIn').post(controller.isLoggedIn);
 	app.route('/api/addtostore').post(controller.addItemsToStore);
 	app.route('/api/hasstore').post(controller.hasStore);
+	app.route('/api/getstoreitems').post(controller.listCurrentStoreItems)
 	//app.route('/api/logout').post(controller.signup);
 }

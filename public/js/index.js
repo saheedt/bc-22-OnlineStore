@@ -42,6 +42,10 @@ window.addEventListener('load', function(){
 			});
 		});
 
+	addToStore.addEventListener('click', (e)=>{
+		window.location.pathname = '/addtostore';
+	});
+
 	indexNavBtn.addEventListener('click', (e)=>{
 		document.getElementById("Dropdown").classList.toggle("show");
 	});

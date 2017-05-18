@@ -178,7 +178,7 @@ nav {
 #productListContainer{
 	width: 80%;
 	margin-left: 10%;
-	background-color: purple;
+	background-color: lightgray;
 	/*position: absolute;*/
 	margin-top: 1rem;
 	height: 100%;
@@ -211,4 +211,28 @@ nav {
     text-decoration: none;
     font-size: 14px;
     border: none;
+}
+#imageHolder{
+	height:	6rem;
+	width:	30%;
+	float:	left;
+	margin-top: 1.2rem
+}
+#txtHolder{
+	height: 100%;
+	width: 60%;
+	float: left;
+}
+#pImg{
+	width: 100px;
+	height: 100px;
+}
+ul {
+	list-style: none;
+}
+.list li{
+	height: 8rem;
+}
+#txtHolder p{
+	border-bottom: 1px solid black;
 }

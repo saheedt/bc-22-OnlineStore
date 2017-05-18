@@ -145,13 +145,26 @@ exports.addItemsToStore = (req, res) => {
 };
 
 //list store items
-exports.listStoreItems = (req, res) => {
-
+exports.listCurrentStoreItems = (req, res) => {
+	let user = firebase.auth().currentUser;
+	if(user != null){
+		let storeName = user.displayName;
+		firebase.database().ref("stores/"+storeName).once('value')
+			.then((snapshot) =>{
+  			let items = snapshot.val();
+  			res.send(items);
+		});
+	}else{
+		res.redirect('index.html');
+	}
+	
 };
 
 
 exports.hasStore = (req, res)=>{
+
 	const user = firebase.auth().currentUser;
+
 	const storesRef = db.ref('stores');
 	let found = false;
 	storesRef.once('value').then((snapshot)=>{
@@ -175,6 +188,10 @@ exports.hasStore = (req, res)=>{
 	});
 };
 
+exports.showStore = (req, res) =>{
+	
+}
+
 /*******view controllers*******/
 
 exports.showLanding = (req, res)=>{
@@ -187,6 +204,6 @@ exports.showSignUp = (req, res)=>{
 	res.redirect('signup.html');
 };
 
-exports.showAddTStore = (req, res) => {
+exports.showAddToStore = (req, res) => {
 	res.redirect('addtostore.html');
 };

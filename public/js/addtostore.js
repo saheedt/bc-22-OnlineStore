@@ -9,9 +9,7 @@ window.addEventListener('load', function(){
 	let productTitle = document.getElementById("productTitle");
 	let productPrice = document.getElementById("productPrice");
 	let productDesc = document.getElementById("productDesc");
-	let productImage;
-
-
+	let productImage, storeData = [], dataCollected = false;
 
 
 
@@ -27,6 +25,7 @@ window.addEventListener('load', function(){
 
 				if(resp.message == "Not Logged In"){
 					signOutBtn.style.display = "none";
+					window.location.pathname = "/login";
 				}
 			});
 		});
@@ -90,12 +89,58 @@ addItemsToStoreBtn.addEventListener("click",()=>{
 	});
 });
 
-/*
+fetch("http://localhost:3000/api/getstoreitems", {
+  		method: "POST",
+  		headers:{'Content-Type':'application/json'},
+		})
+		.then((response)=>{
+			response.json().then((storeItems)=>{
+				let temp = [], directory = storeItems.entry;
+				for (let data in directory){
+					storeData.push(directory[data]);
+				}
+				dataCollected = true;
+
+			});
+		})
+		.catch((error)=>{
+			console.log(error);
+			//TODO: Error handling..
+	});
+
 //do listing
-let options = {
-	valueNames:['title', 'price', 'desc', {name: 'image', attr: 'src'} ]
-};
-let productListing = new List('productListing', options);*/
+let index = 0, toAdd;
+let doAdd = setInterval(()=>{
+
+		if(dataCollected === true){
+			
+			if(storeData[index] === undefined){
+				clearInterval(doAdd);
+				index = 0;
+			}
+		let options = {
+		valueNames:['title', 'price', 'desc', {name: 'image', attr: 'src'} ],
+		item: '<li><div id="imageHolder"><img id="pImg" class="image"></div><div id="txtHolder"><p class="title"></p><p class="price">U+020A6</p><p class="desc"></p></div></li>'
+		};
+		let productListing = new List('productListing', options);
+		toAdd = storeData[index];
+		productListing.add(toAdd);
+		index = index + 1;
+	}
+
+},2000);
+
+/*function doTpl(){
+	let options = {
+		valueNames:['title', 'price', 'desc', {name: 'image', attr: 'src'} ],
+		item: '<li><div id="imageHolder"><img class="image"></div><div id="txtHolder"><p class="title"></p><p class="price"></p><p class="desc"></p></div></li>'
+	};
+	let productListing = new List('productListing', options);
+
+	for( let i = 0; i <= storeData.length; i++ ){
+		productListing.add(storeData[i]);
+	}
+};*/
 
 });
 
