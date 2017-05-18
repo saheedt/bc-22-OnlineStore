@@ -3,13 +3,16 @@
 const firebase = require('firebase');
 const config = require('../../config.json');
 
+//to hold path to db on store public query
+let storePath;
+
 //initialize firebase with project config.
 firebase.initializeApp(config);
 
+//database instance
 const db = firebase.database();
-//export login control
 
-//api controllers
+/**********api controllers******/
 
 //login api
 exports.login = (req, res)=>{
@@ -24,7 +27,7 @@ exports.login = (req, res)=>{
 		res.send(error);
 	});
 };
-
+//api to check auth status
 exports.isLoggedIn = (req, res)=>{
 	const user = firebase.auth().currentUser;
 	if(user != null){
@@ -58,6 +61,7 @@ exports.signup = (req, res)=>{
 		res.send({"message":{"Sign Up Error": error}});
 	});
 };
+//api for sign out
 exports.signout = (req, res)=>{
 
 	firebase.auth().signOut().then(function() {
@@ -160,7 +164,7 @@ exports.listCurrentStoreItems = (req, res) => {
 	
 };
 
-
+//api to check store availability
 exports.hasStore = (req, res)=>{
 
 	const user = firebase.auth().currentUser;
@@ -188,22 +192,36 @@ exports.hasStore = (req, res)=>{
 	});
 };
 
-exports.showStore = (req, res) =>{
-	
-}
+//api to get store contents from db on public query
+exports.getStore = (req, res) =>{
+	console.log(storePath);
+	firebase.database().ref(storePath).once('value')
+		.then((snapshot)=>{
+			let entries = snapshot.val();
+  			res.send(entries);
+		});
+};
 
 /*******view controllers*******/
 
+//shows landing page
 exports.showLanding = (req, res)=>{
 	res.redirect('index.html');
 };
+//shows login page
 exports.showLogin = (req, res)=>{
 	res.redirect('login.html');
 };
+//shows sign up page
 exports.showSignUp = (req, res)=>{
 	res.redirect('signup.html');
 };
-
+//shows page to add sore items
 exports.showAddToStore = (req, res) => {
 	res.redirect('addtostore.html');
+};
+//redirects to store on direct url hit.
+exports.showStorePage = (req, res) => {
+	storePath = req.path;
+	res.redirect('/store.html');
 };
