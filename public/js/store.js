@@ -3,6 +3,7 @@ window.addEventListener('load', function(){
 	const storeCreateStore = document.getElementById("storeCreateStore");
 	const storeAddToStore = document.getElementById("storeAddToStore");
 	const storeSignOut = document.getElementById("storeSignOut");
+	let home = document.getElementById("navHome");
 	let storeData = [], dataCollected = false;
 
 	//check if a user has a store created
@@ -39,7 +40,9 @@ window.addEventListener('load', function(){
 			}
 		});
 	});
-
+	home.addEventListener("click",(e)=>{
+		window.location.pathname = "/";
+	});
 	storeAddToStore.addEventListener('click', (e)=>{
 		window.location.pathname = '/addtostore';
 	});
@@ -108,7 +111,7 @@ window.addEventListener('load', function(){
 
 				let options ={
 					valueNames:['title', 'price', 'desc', {name: 'image', attr: 'src'} ],
-					item: '<li><img id="storeImg" class="image"></li>'
+					item: '<li><img id="storeImg" class="image"><br><div class="details"><p class="title"></p><p class="price">₦</p><p class="desc"></p></div></li>'
 				};
 				let storeProductListing = new List('storeProductListing', options);
 

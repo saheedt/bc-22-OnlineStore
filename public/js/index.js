@@ -4,6 +4,7 @@ window.addEventListener('load', function(){
 	const indexSignOut = document.getElementById('indexSignOut');
 	const indexCreateStore = document.getElementById("createStore");
 	const indexAddToStore = document.getElementById("addToStore");
+	const loginSignUpBtn = document.getElementById("loginSignUpBtn");
 
 	
 	const hasStore = ()=>{
@@ -45,7 +46,6 @@ window.addEventListener('load', function(){
 	addToStore.addEventListener('click', (e)=>{
 		window.location.pathname = '/addtostore';
 	});
-
 	indexNavBtn.addEventListener('click', (e)=>{
 		document.getElementById("Dropdown").classList.toggle("show");
 	});

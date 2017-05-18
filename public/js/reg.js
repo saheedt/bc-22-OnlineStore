@@ -7,6 +7,7 @@ window.addEventListener('load', function(){
 	let password = document.getElementById('signupPasswordInput');
 	let xpassword = document.getElementById('xsignupPasswordInput');
 	let errorDisplay = document.getElementById('regErrDisplay');
+	let regLoginBtn = document.getElementById("regLoginBtn");
 	let formData, xForm, formParams;
 
 	email.addEventListener('blur', (e)=>{
@@ -34,6 +35,9 @@ window.addEventListener('load', function(){
 			errorDisplay.innerText = "";
 		}
 	});
+	regLoginBtn.addEventListener('click', (e)=>{
+		window.location.pathname = '/login';
+	})
 
 	form.addEventListener('submit', (e)=>{
 		//application/x-www-form-urlencoded

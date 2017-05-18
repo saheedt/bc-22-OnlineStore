@@ -120,7 +120,7 @@ let doAdd = setInterval(()=>{
 			}
 		let options = {
 		valueNames:['title', 'price', 'desc', {name: 'image', attr: 'src'} ],
-		item: '<li><div id="imageHolder"><img id="pImg" class="image"></div><div id="txtHolder"><p class="title"></p><p class="price">U+020A6</p><p class="desc"></p></div></li>'
+		item: '<li><div id="imageHolder"><img id="pImg" class="image"></div><div id="txtHolder"><p class="title"></p><p class="price">₦</p><p class="desc"></p></div></li>'
 		};
 		let productListing = new List('productListing', options);
 		toAdd = storeData[index];

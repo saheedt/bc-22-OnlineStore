@@ -5,6 +5,7 @@ window.addEventListener('load', function(){
 	let email = document.getElementById('loginEmailInput');
 	let password = document.getElementById('loginPasswordInput');
 	let errorDisplay = document.getElementById('loginErrDisplay');
+	let loginSignUpBtn = document.getElementById('loginSignUpBtn');
 	let formData;
 
 	email.addEventListener('blur', (e)=>{
@@ -24,6 +25,9 @@ window.addEventListener('load', function(){
 		}
 	});
 
+	loginSignUpBtn.addEventListener("click",(e)=> {
+		window.location.pathname = "/signup";
+	});
 
 
 	form.addEventListener('submit', (e)=>{
