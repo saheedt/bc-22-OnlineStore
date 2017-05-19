@@ -121,31 +121,7 @@ window.addEventListener('load', function(){
 						storeProductListing.add(storeData[count]);
 					}
 				}
-
-		/*let doAdd = setInterval(()=>{
-
-			if(dataCollected === true){
-			
-			if(storeData[index] === undefined){
-				clearInterval(doAdd);
-				index = 0;
-			}
-		let options = {
-		valueNames:['title', 'price', 'desc', {name: 'image', attr: 'src'} ],
-		item: '<li><div id="imageHolder"><img id="pImg" class="image"></div><div id="txtHolder"><p class="title"></p><p class="price">U+020A6</p><p class="desc"></p></div></li>'
-		};
-		let productListing = new List('productListing', options);
-		toAdd = storeData[index];
-		productListing.add(toAdd);
-		index = index + 1;
-	}
-
-},2000);*/
-
-
-
-
-
+				
 			});
 		});
 

@@ -25,10 +25,15 @@ window.addEventListener('load', function(){
 		}
 	});
 
+
+
 	loginSignUpBtn.addEventListener("click",(e)=> {
 		window.location.pathname = "/signup";
 	});
 
+	loginBtn.addEventListener('click', (e)=>{
+		document.getElementById("mask").classList.toggle("loading-mask");
+	});
 
 	form.addEventListener('submit', (e)=>{
 		e.preventDefault();
@@ -43,6 +48,7 @@ window.addEventListener('load', function(){
   		body: JSON.stringify(formData)
 		})
 		.then((response)=>{
+			document.getElementById("mask").classList.toggle("lmask");
 			response.json().then((resp)=>{
 				if(resp.uid){
 					if(typeof window._cameFrom == "string"){

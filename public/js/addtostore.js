@@ -9,7 +9,57 @@ window.addEventListener('load', function(){
 	let productTitle = document.getElementById("productTitle");
 	let productPrice = document.getElementById("productPrice");
 	let productDesc = document.getElementById("productDesc");
-	let productImage, storeData = [], dataCollected = false;
+	let genLink = document.getElementById('genStoreLink');
+
+	let productImage, storeData = [], dataCollected = false, cached = [];
+
+
+	genLink.addEventListener('click',()=>{
+		fetch(location.origin+"/api/genstorelink", {
+  		method: "POST"
+		}).then((resp)=>{
+			resp.json().then((user)=>{
+				console.log(user.message);
+				let linkcontainer = document.getElementById('linkContainer');
+				linkcontainer.innerText= location.origin+"/store/"+user.message;
+				linkcontainer.style.display = "block";
+			})
+		})
+	});
+
+	const getStoreItems = fetch(location.origin+"/api/getstoreitems", {
+  		method: "POST",
+  		headers:{'Content-Type':'application/json'},
+		})
+		.then((response)=>{
+			response.json().then((storeItems)=>{
+				let directory = storeItems.entry;
+				for (let data in directory){
+					storeData.push(directory[data]);
+				}
+				dataCollected = true;
+
+				if(dataCollected == true){
+					let options = {
+						valueNames:['title', 'price', 'desc', {name: 'image', attr: 'src'} ],
+						item: '<li><div id="imageHolder"><img id="pImg" class="image"></div><div id="txtHolder"><p class="title"></p><p class="price">₦</p><p class="desc"></p></div></li>'
+					};
+					let productListing = new List('productListing', options);
+
+					for(let count = 0; count < storeData.length; count++){
+						if(storeData[count] !== undefined){
+							productListing.add(storeData[count]);
+						}
+					}
+					dataCollected = false;
+				}
+
+			});
+		})
+		.catch((error)=>{
+			console.log(error);
+			//TODO: Error handling..
+	});
 
 
 
@@ -21,6 +71,7 @@ window.addEventListener('load', function(){
 			response.json().then((resp)=>{
 				if(resp.message == "Logged In"){
 					signOutBtn.style.display = "block";
+					getStoreItems();
 				}
 
 				if(resp.message == "Not Logged In"){
@@ -80,6 +131,11 @@ addItemsToStoreBtn.addEventListener("click",()=>{
 				if(resp.message == "log in to add items to store"){
 					window._cameFrom = "/addtostore";
 					window.location.pathname = "/login";
+				}else if(resp.message == "item added to store"){
+					productTitle.value = "";
+					productPrice.value = "";
+					imgTag.src = "";
+					getStoreItems();
 				}
 			});
 		})
@@ -89,52 +145,8 @@ addItemsToStoreBtn.addEventListener("click",()=>{
 	});
 });
 
-fetch(location.origin+"/api/getstoreitems", {
-  		method: "POST",
-  		headers:{'Content-Type':'application/json'},
-		})
-		.then((response)=>{
-			response.json().then((storeItems)=>{
-				let directory = storeItems.entry;
-				for (let data in directory){
-					storeData.push(directory[data]);
-				}
-				dataCollected = true;
 
-			});
-		})
-		.catch((error)=>{
-			console.log(error);
-			//TODO: Error handling..
-	});
-
-//do listing
-let index = 0, toAdd;
-let doAdd = setInterval(()=>{
-
-		if(dataCollected === true){
-			
-			if(storeData[index] === undefined){
-				clearInterval(doAdd);
-				index = 0;
-			}
-		let options = {
-		valueNames:['title', 'price', 'desc', {name: 'image', attr: 'src'} ],
-		item: '<li><div id="imageHolder"><img id="pImg" class="image"></div><div id="txtHolder"><p class="title"></p><p class="price">₦</p><p class="desc"></p></div></li>'
-		};
-		let productListing = new List('productListing', options);
-		toAdd = storeData[index];
-		productListing.add(toAdd);
-		index = index + 1;
-	}
-
-},2000);
-
-
-});
-
-
-function resizeImageToSpecificWidth(file, max, cb) {
+		function resizeImageToSpecificWidth(file, max, cb) {
   let data;
     let reader = new FileReader();
     reader.onload = function(event) {
@@ -164,3 +176,5 @@ function resizeImageToSpecificWidth(file, max, cb) {
     };
     reader.readAsDataURL(file);
 }
+
+});

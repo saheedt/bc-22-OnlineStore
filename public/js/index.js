@@ -4,7 +4,8 @@ window.addEventListener('load', function(){
 	const indexSignOut = document.getElementById('indexSignOut');
 	const indexCreateStore = document.getElementById("createStore");
 	const indexAddToStore = document.getElementById("addToStore");
-	const loginSignUpBtn = document.getElementById("loginSignUpBtn");
+	const indexLoginBtn = document.getElementById("navUserBtn");
+	let homeOut = [];
 
 	
 	const hasStore = ()=>{
@@ -23,6 +24,39 @@ window.addEventListener('load', function(){
 			});
 		});
 	};
+
+	indexLoginBtn.addEventListener('click', ()=>{
+		window.location.pathname = "/login";
+	});
+
+	fetch(location.origin+"/api/getAll",{
+			method: "POST"
+		}).then((response)=>{
+			response.json().then((store)=>{
+				console.log(store);
+				for(let name in store){
+					for(let key in store[name].entry){
+						//console.log(typeof store[name].entry[key]);
+						if(typeof store[name].entry[key] == "object"){
+							homeOut.push(store[name].entry[key]);
+						}
+					}
+				}
+
+				let options ={
+					valueNames:['title', 'price', 'desc', {name: 'image', attr: 'src'} ],
+					item: '<li><img id="storeImg" class="image"><br><div class="details"><p class="title"></p><p class="price">₦</p><p class="desc"></p></div></li>'
+				};
+				let indexProductListing = new List('indexProductListing', options);
+
+				for(let count = 0; count < homeOut.length; count++){
+					//console.log(storeData[count]);
+					if(homeOut[count] !== undefined){
+						indexProductListing.add(homeOut[count]);
+					}
+				}				
+			});
+		});
 
 	// check if user is logged in and handle signout button
 	// accordingly.

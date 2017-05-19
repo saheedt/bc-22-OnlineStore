@@ -141,6 +141,7 @@ exports.addItemsToStore = (req, res) => {
 				}
 
 			});
+			res.send({"message":"item added to store"});
 
 	}else{
 		res.send({"message": "log in to add items to store"})
@@ -200,6 +201,17 @@ exports.getStore = (req, res) =>{
 			let entries = snapshot.val();
   			res.send(entries);
 		});
+};
+
+exports.getAllProducts = (req, res) =>{
+	let returnData = [];
+	firebase.database().ref("stores").once('value', (snapshot)=>{
+		res.send(snapshot.val());
+	});
+};
+exports.genStoreLink =(req, res) =>{
+	const user = firebase.auth().currentUser.displayName;
+	res.send({"message": user});
 };
 
 /*******view controllers*******/

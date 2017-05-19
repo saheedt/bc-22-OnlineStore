@@ -21,4 +21,6 @@ module.exports = (app)=>{
 	app.route('/api/hasstore').post(controller.hasStore);
 	app.route('/api/getstoreitems').post(controller.listCurrentStoreItems);
 	app.route('/api/getsore').post(controller.getStore);
+	app.route('/api/getAll').post(controller.getAllProducts);
+	app.route('/api/genstorelink').post(controller.genStoreLink);
 }

@@ -66,7 +66,7 @@ nav {
 #indexContainer{
 	width: 90%;
 	height: 100rem;
-	background-color: lightgray;
+	/*background-color: lightgray;*/
 	margin:auto;
 	/*position: absolute;*/
 }
@@ -74,7 +74,7 @@ nav {
 	height:20rem;
 	width:100%;
 	/*margin-left: 5%;*/
-	background-color: orange;
+	/*background-color: orange;*/
 	margin-top: 3.5rem;
 	/*position: absolute;*/
 
@@ -84,7 +84,7 @@ nav {
 	width: 100%%;
 	margin-top: 1rem;
 	/*margin-left:5%;*/
-	background-color: #00AECC;
+	/*background-color: #00AECC;*/
 	/*margin:auto;*/
 }
 #loginContainer{
@@ -190,6 +190,13 @@ nav {
 	width: 100%;
 	height: 80rem;
 }
+#linkContainer{
+	margin-top: 4rem;
+	text-align: center;
+	background-color: lightgray;
+	font:15px;
+
+}
 #productPostContainer{
 	width: 80%;
 	margin-left: 10%;
@@ -265,10 +272,21 @@ ul {
 	margin-left: 3rem;
 	box-shadow: 3px 3px 3px #888888;
 }
+#indexlist li{
+	float: left;
+	margin-top: 5rem;
+	margin-left: 3rem;
+	box-shadow: 3px 3px 3px #888888;
+}
 #storeImg{
 	width: 150px;
 	height: 150px;
 }
 .details{
 
+}
+#navUserBtn{
+	color: #00AECC;
+	margin-left: 2rem;
+	margin-top: 0.5rem;
 }
