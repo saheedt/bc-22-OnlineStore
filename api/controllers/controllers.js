@@ -235,5 +235,5 @@ exports.showAddToStore = (req, res) => {
 //redirects to store on direct url hit.
 exports.showStorePage = (req, res) => {
 	storePath = req.path;
-	res.redirect('store.html');
+	res.redirect('/store.html');
 };
