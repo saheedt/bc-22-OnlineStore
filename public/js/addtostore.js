@@ -21,7 +21,7 @@ window.addEventListener('load', function(){
 			resp.json().then((user)=>{
 				console.log(user.message);
 				let linkcontainer = document.getElementById('linkContainer');
-				linkcontainer.innerText= location.origin+"/store/"+user.message;
+				linkcontainer.innerText= location.origin+"/stores/"+user.message;
 				linkcontainer.style.display = "block";
 			})
 		})
